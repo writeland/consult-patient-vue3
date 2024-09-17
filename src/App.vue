@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { Button as VanButton } from 'vant'
-import { useUserStore } from './stores/user'
+import { useUserStore } from './stores'
 
 const store = useUserStore()
 </script>

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "pinia": "^2.1.7",
+    "vant": "^4.9.6",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
@@ -37,6 +38,7 @@
     "husky": "^8.0.0",
     "lint-staged": "^15.2.10",
     "npm-run-all2": "^6.2.0",
+    "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^3.2.5",
     "sass": "^1.78.0",
     "typescript": "~5.4.0",

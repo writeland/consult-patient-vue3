@@ -11,6 +11,9 @@ importers:
       pinia:
         specifier: ^2.1.7
         version: 2.2.2(typescript@5.4.5)(vue@3.5.6(typescript@5.4.5))
+      vant:
+        specifier: ^4.9.6
+        version: 4.9.6(vue@3.5.6(typescript@5.4.5))
       vue:
         specifier: ^3.4.29
         version: 3.5.6(typescript@5.4.5)
@@ -54,6 +57,9 @@ importers:
       npm-run-all2:
         specifier: ^6.2.0
         version: 6.2.3
+      postcss-px-to-viewport:
+        specifier: ^1.1.1
+        version: 1.1.1
       prettier:
         specifier: ^3.2.5
         version: 3.3.3
@@ -602,6 +608,14 @@ packages:
 
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==, tarball: https://registry.npmmirror.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz}
+
+  '@vant/popperjs@1.3.0':
+    resolution: {integrity: sha512-hB+czUG+aHtjhaEmCJDuXOep0YTZjdlRR+4MSmIFnkCQIxJaXLQdSsR90XWvAI2yvKUI7TCGqR8pQg2RtvkMHw==, tarball: https://registry.npmmirror.com/@vant/popperjs/-/popperjs-1.3.0.tgz}
+
+  '@vant/use@1.6.0':
+    resolution: {integrity: sha512-PHHxeAASgiOpSmMjceweIrv2AxDZIkWXyaczksMoWvKV2YAYEhoizRuk/xFnKF+emUIi46TsQ+rvlm/t2BBCfA==, tarball: https://registry.npmmirror.com/@vant/use/-/use-1.6.0.tgz}
+    peerDependencies:
+      vue: ^3.0.0
 
   '@vitejs/plugin-vue@5.1.3':
     resolution: {integrity: sha512-3xbWsKEKXYlmX82aOHufFQVnkbMC/v8fLpWwh6hWOUrK5fbbtBh9Q/WWse27BFgSy2/e2c0fz5Scgya9h2GLhw==, tarball: https://registry.npmmirror.com/@vitejs/plugin-vue/-/plugin-vue-5.1.3.tgz}
@@ -1348,6 +1362,10 @@ packages:
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==, tarball: https://registry.npmmirror.com/nth-check/-/nth-check-2.1.1.tgz}
 
+  object-assign@4.1.1:
+    resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==, tarball: https://registry.npmmirror.com/object-assign/-/object-assign-4.1.1.tgz}
+    engines: {node: '>=0.10.0'}
+
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==, tarball: https://registry.npmmirror.com/once/-/once-1.4.0.tgz}
 
@@ -1431,6 +1449,9 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  postcss-px-to-viewport@1.1.1:
+    resolution: {integrity: sha512-2x9oGnBms+e0cYtBJOZdlwrFg/mLR4P1g2IFu7jYKvnqnH/HLhoKyareW2Q/x4sg0BgklHlP1qeWo2oCyPm8FQ==, tarball: https://registry.npmmirror.com/postcss-px-to-viewport/-/postcss-px-to-viewport-1.1.1.tgz}
 
   postcss-selector-parser@6.1.2:
     resolution: {integrity: sha512-Q8qQfPiZ+THO/3ZrOrO0cJJKfpYCagtMUkXbnEfmgUjwXg6z/WBeOyS9APBBPCTSiDV+s4SwQGu8yFsiMRIudg==, tarball: https://registry.npmmirror.com/postcss-selector-parser/-/postcss-selector-parser-6.1.2.tgz}
@@ -1651,6 +1672,11 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==, tarball: https://registry.npmmirror.com/util-deprecate/-/util-deprecate-1.0.2.tgz}
+
+  vant@4.9.6:
+    resolution: {integrity: sha512-lT0Q6hlYkZQngFWaQSxUIy8AK5bL0IlLiEtyNhMgwDwFpb3JV9DV03GWpUIQM45APm5SCC81xnPIjlrqP/64QA==, tarball: https://registry.npmmirror.com/vant/-/vant-4.9.6.tgz}
+    peerDependencies:
+      vue: ^3.0.0
 
   vite-hot-client@0.2.3:
     resolution: {integrity: sha512-rOGAV7rUlUHX89fP2p2v0A2WWvV3QMX2UYq0fRqsWSvFvev4atHWqjwGoKaZT1VTKyLGk533ecu3eyd0o59CAg==, tarball: https://registry.npmmirror.com/vite-hot-client/-/vite-hot-client-0.2.3.tgz}
@@ -2277,6 +2303,12 @@ snapshots:
       eslint-visitor-keys: 3.4.3
 
   '@ungap/structured-clone@1.2.0': {}
+
+  '@vant/popperjs@1.3.0': {}
+
+  '@vant/use@1.6.0(vue@3.5.6(typescript@5.4.5))':
+    dependencies:
+      vue: 3.5.6(typescript@5.4.5)
 
   '@vitejs/plugin-vue@5.1.3(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0))(vue@3.5.6(typescript@5.4.5))':
     dependencies:
@@ -3078,6 +3110,8 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
+  object-assign@4.1.1: {}
+
   once@1.4.0:
     dependencies:
       wrappy: 1.0.2
@@ -3147,6 +3181,11 @@ snapshots:
       vue-demi: 0.14.10(vue@3.5.6(typescript@5.4.5))
     optionalDependencies:
       typescript: 5.4.5
+
+  postcss-px-to-viewport@1.1.1:
+    dependencies:
+      object-assign: 4.1.1
+      postcss: 8.4.47
 
   postcss-selector-parser@6.1.2:
     dependencies:
@@ -3343,6 +3382,13 @@ snapshots:
       punycode: 2.3.1
 
   util-deprecate@1.0.2: {}
+
+  vant@4.9.6(vue@3.5.6(typescript@5.4.5)):
+    dependencies:
+      '@vant/popperjs': 1.3.0
+      '@vant/use': 1.6.0(vue@3.5.6(typescript@5.4.5))
+      '@vue/shared': 3.5.6
+      vue: 3.5.6(typescript@5.4.5)
 
   vite-hot-client@0.2.3(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0)):
     dependencies:

@@ -49,7 +49,7 @@ instance.interceptors.response.use(
 
 export default instance
 
-// 这个需要替换axsio.request默认的响应成功后的结果类型
+// 这个需要替换axios.request默认的响应成功后的结果类型
 // 之前是：传 { name: string } 然后res是   res = { data: { name: string } }
 // 但现在：在响应拦截器中返回了 res.data  也就是将来响应成功后的结果，和上面的类型一致吗？
 // 所以要：request<数据类型，数据类型>() 这样才指定了 res.data 的类型

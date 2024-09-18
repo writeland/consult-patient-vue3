@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+  <div>这是登录页面</div>
 </template>
 
 <script setup lang="ts">

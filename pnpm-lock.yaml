@@ -75,12 +75,15 @@ importers:
       typescript:
         specifier: ~5.4.0
         version: 5.4.5
+      unplugin-vue-components:
+        specifier: ^0.27.4
+        version: 0.27.4(@babel/parser@7.25.6)(@nuxt/kit@3.13.2(rollup@4.21.3))(rollup@4.21.3)(vue@3.5.6(typescript@5.4.5))
       vite:
         specifier: ^5.3.1
         version: 5.4.6(@types/node@20.16.5)(sass@1.78.0)
       vite-plugin-vue-devtools:
         specifier: ^7.3.1
-        version: 7.4.5(rollup@4.21.3)(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0))(vue@3.5.6(typescript@5.4.5))
+        version: 7.4.5(@nuxt/kit@3.13.2(rollup@4.21.3))(rollup@4.21.3)(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0))(vue@3.5.6(typescript@5.4.5))
       vue-tsc:
         specifier: ^2.0.21
         version: 2.1.6(typescript@5.4.5)
@@ -1887,6 +1890,19 @@ packages:
   universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==, tarball: https://registry.npmmirror.com/universalify/-/universalify-2.0.1.tgz}
     engines: {node: '>= 10.0.0'}
+
+  unplugin-vue-components@0.27.4:
+    resolution: {integrity: sha512-1XVl5iXG7P1UrOMnaj2ogYa5YTq8aoh5jwDPQhemwO/OrXW+lPQKDXd1hMz15qxQPxgb/XXlbgo3HQ2rLEbmXQ==, tarball: https://registry.npmmirror.com/unplugin-vue-components/-/unplugin-vue-components-0.27.4.tgz}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@babel/parser': ^7.15.8
+      '@nuxt/kit': ^3.2.2
+      vue: 2 || 3
+    peerDependenciesMeta:
+      '@babel/parser':
+        optional: true
+      '@nuxt/kit':
+        optional: true
 
   unplugin@1.14.1:
     resolution: {integrity: sha512-lBlHbfSFPToDYp9pjXlUEFVxYLaue9f9T1HC+4OHlmj+HnMDdz9oZY+erXfoCe/5V/7gKUSY2jpXPb9S7f0f/w==, tarball: https://registry.npmmirror.com/unplugin/-/unplugin-1.14.1.tgz}
@@ -3895,6 +3911,27 @@ snapshots:
 
   universalify@2.0.1: {}
 
+  unplugin-vue-components@0.27.4(@babel/parser@7.25.6)(@nuxt/kit@3.13.2(rollup@4.21.3))(rollup@4.21.3)(vue@3.5.6(typescript@5.4.5)):
+    dependencies:
+      '@antfu/utils': 0.7.10
+      '@rollup/pluginutils': 5.1.0(rollup@4.21.3)
+      chokidar: 3.6.0
+      debug: 4.3.7
+      fast-glob: 3.3.2
+      local-pkg: 0.5.0
+      magic-string: 0.30.11
+      minimatch: 9.0.5
+      mlly: 1.7.1
+      unplugin: 1.14.1
+      vue: 3.5.6(typescript@5.4.5)
+    optionalDependencies:
+      '@babel/parser': 7.25.6
+      '@nuxt/kit': 3.13.2(rollup@4.21.3)
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+      - webpack-sources
+
   unplugin@1.14.1:
     dependencies:
       acorn: 8.12.1
@@ -3935,7 +3972,7 @@ snapshots:
     dependencies:
       vite: 5.4.6(@types/node@20.16.5)(sass@1.78.0)
 
-  vite-plugin-inspect@0.8.7(rollup@4.21.3)(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0)):
+  vite-plugin-inspect@0.8.7(@nuxt/kit@3.13.2(rollup@4.21.3))(rollup@4.21.3)(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0)):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.21.3)
@@ -3947,11 +3984,13 @@ snapshots:
       picocolors: 1.1.0
       sirv: 2.0.4
       vite: 5.4.6(@types/node@20.16.5)(sass@1.78.0)
+    optionalDependencies:
+      '@nuxt/kit': 3.13.2(rollup@4.21.3)
     transitivePeerDependencies:
       - rollup
       - supports-color
 
-  vite-plugin-vue-devtools@7.4.5(rollup@4.21.3)(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0))(vue@3.5.6(typescript@5.4.5)):
+  vite-plugin-vue-devtools@7.4.5(@nuxt/kit@3.13.2(rollup@4.21.3))(rollup@4.21.3)(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0))(vue@3.5.6(typescript@5.4.5)):
     dependencies:
       '@vue/devtools-core': 7.4.5(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0))(vue@3.5.6(typescript@5.4.5))
       '@vue/devtools-kit': 7.4.5
@@ -3959,7 +3998,7 @@ snapshots:
       execa: 8.0.1
       sirv: 2.0.4
       vite: 5.4.6(@types/node@20.16.5)(sass@1.78.0)
-      vite-plugin-inspect: 0.8.7(rollup@4.21.3)(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0))
+      vite-plugin-inspect: 0.8.7(@nuxt/kit@3.13.2(rollup@4.21.3))(rollup@4.21.3)(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0))
       vite-plugin-vue-inspector: 5.2.0(vite@5.4.6(@types/node@20.16.5)(sass@1.78.0))
     transitivePeerDependencies:
       - '@nuxt/kit'

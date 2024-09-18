@@ -1,9 +1,27 @@
 <template>
-  <van-nav-bar fixed left-arrow title="登录" right-text="注册"></van-nav-bar>
+  <van-nav-bar
+    fixed
+    left-arrow
+    :title="title"
+    :right-text="rightText"
+    @click-right="onClickRight"
+  ></van-nav-bar>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+  title?: string
+  rightText?: string
+}>()
 
+const emit = defineEmits<{
+  (e: 'click-right'): void
+}>()
+
+const onClickRight = () => {
+  emit('click-right')
+}
+</script>
 <style scoped lang="scss">
 :deep() {
   .van-nav-bar {

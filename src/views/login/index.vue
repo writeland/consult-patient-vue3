@@ -41,6 +41,7 @@ const onSend = async () => {
   // console.log('send') 验证成功后发送短信验证码
   const res = await sendMobileCode(mobile.value, 'login')
   showToast('发送成功！')
+  console.log(res)
   time.value = 60
   // 开启倒计时
   if (timer) {
@@ -122,6 +123,10 @@ onUnmounted(() => {
         <a href="javascript:;">忘记密码？</a>
       </div>
     </van-form>
+    <svg aria-hidden="true">
+      <!-- #icon-文件夹名称-图片名称 -->
+      <use href="#icon-login-eye-off" />
+    </svg>
     <!-- 底部 -->
     <div class="login-other">
       <van-divider>第三方登录</van-divider>

@@ -1,11 +1,9 @@
 <template>
-  <div>这是登录页面</div>
-  <van-button>按钮</van-button>
+  <cp-nav-bar></cp-nav-bar>
+  <van-button>登录</van-button>
   <van-checkbox>付现款</van-checkbox>
 </template>
 
-<script setup lang="ts">
-import { ref, reactive } from 'vue'
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

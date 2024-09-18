@@ -2,8 +2,9 @@ import { createApp } from 'vue'
 import pinia from '@/stores/index'
 import App from './App.vue'
 import router from './router'
-import './style/main.scss'
+
 import 'vant/lib/index.css'
+import './style/main.scss'
 
 const app = createApp(App)
 app.use(router)

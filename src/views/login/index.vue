@@ -2,7 +2,7 @@
 import { onUnmounted, ref } from 'vue'
 import { mobileRules, passwordRules, codeRules } from '@/utils/rules'
 import { showSuccessToast, showToast, type FormInstance } from 'vant'
-import { loginByPassword, sendMobileCode } from '@/services/user'
+import { loginByMobile, loginByPassword, sendMobileCode } from '@/services/user'
 import { useUserStore } from '@/stores'
 import { useRoute, useRouter } from 'vue-router'
 const mobile = ref('13211112222')
@@ -16,7 +16,10 @@ const onSubmit = async () => {
   if (!agree.value) {
     return showToast('请勾选协议！')
   }
-  const res = await loginByPassword(mobile.value, password.value)
+  // 进行登录（合并短信登录）
+  const res = isPass.value
+    ? await loginByPassword(mobile.value, password.value)
+    : await loginByMobile(mobile.value, code.value)
   store.setUser(res.data)
   showSuccessToast('登录成功！')
   router.replace((route.query.returnUrl as string) || '/user')
@@ -24,7 +27,8 @@ const onSubmit = async () => {
 
 // 短信登录界面切换
 const isPass = ref(true)
-const code = ref('')
+// code是模拟的数据，需要打开网络查看请求回来的code值
+const code = ref()
 
 const time = ref(0)
 const form = ref<FormInstance>()

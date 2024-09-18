@@ -6,6 +6,10 @@ export const loginByPassword = (mobile: string, password: string) => {
   return request<User>('login/password', 'POST', { mobile, password })
 }
 
+// 短信验证码登录
+export const loginByMobile = (mobile: string, code: string) =>
+  request<User>('login', 'POST', { mobile, code })
+
 // 发送验证码
 export const sendMobileCode = (mobile: string, type: CodeType) =>
   request('code', 'GET', { mobile, type })

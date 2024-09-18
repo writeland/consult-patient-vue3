@@ -12,4 +12,9 @@ const passwordRules: FieldRule[] = [
   { pattern: /^\w{8,24}$/, message: '密码必须是8-24个字符' }
 ]
 
-export { mobileRules, passwordRules }
+const codeRules: FieldRule[] = [
+  { required: true, message: '请输入短信验证码' },
+  { pattern: /^\d{6}$/, message: '输入6位的验证码' }
+]
+
+export { mobileRules, passwordRules, codeRules }

@@ -8,6 +8,10 @@ import { useRoute, useRouter } from 'vue-router'
 const mobile = ref('13211112222')
 const password = ref('abc12345')
 const agree = ref(false)
+
+// 控制密码是否显示
+const show = ref(false)
+
 const store = useUserStore()
 const router = useRouter()
 const route = useRoute()
@@ -89,8 +93,15 @@ onUnmounted(() => {
         v-model="password"
         :rules="passwordRules"
         placeholder="请输入密码"
-        type="password"
-      ></van-field>
+        :type="show ? 'text' : 'password'"
+      >
+        <template #button>
+          <cp-icon
+            @click="show = !show"
+            :name="`login-eye-${show ? 'on' : 'off'}`"
+          ></cp-icon>
+        </template>
+      </van-field>
       <van-field
         :rules="codeRules"
         v-else
@@ -123,10 +134,6 @@ onUnmounted(() => {
         <a href="javascript:;">忘记密码？</a>
       </div>
     </van-form>
-    <svg aria-hidden="true">
-      <!-- #icon-文件夹名称-图片名称 -->
-      <use href="#icon-login-eye-off" />
-    </svg>
     <!-- 底部 -->
     <div class="login-other">
       <van-divider>第三方登录</van-divider>

@@ -74,6 +74,16 @@ onMounted(async () => {
         </van-col>
       </van-row>
     </div>
+    <!-- 快捷工具 -->
+    <div class="user-page-group">
+      <h3>快捷工具</h3>
+      <van-cell title="标题" is-link :border="false">
+        <template #icon><cp-icon name="user-tool-01" /></template>
+      </van-cell>
+      <van-cell title="标题" is-link :border="false">
+        <template #icon><cp-icon name="user-tool-01" /></template>
+      </van-cell>
+    </div>
   </div>
 </template>
 

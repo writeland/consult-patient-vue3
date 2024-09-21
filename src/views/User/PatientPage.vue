@@ -5,6 +5,7 @@ import { onMounted, ref } from 'vue'
 
 // 组件挂载完毕后获取数据
 const list = ref<PatientList>([])
+const count = ref(10)
 
 const loadList = async () => {
   const res = await getPatientList()
@@ -37,6 +38,12 @@ onMounted(() => {
         <p>添加患者</p>
       </div>
       <div class="patient-tip">最多可添加 6 人</div>
+      <!-- 测试 -->
+      <!-- <cp-radio-btn
+        :model-value="count"
+        @update:model-value="count = $event"
+      ></cp-radio-btn> -->
+      <cp-radio-btn v-model="count"></cp-radio-btn>
     </div>
   </div>
 </template>

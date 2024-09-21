@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { getPatientList, addPatient, editPatient } from '@/services/user'
+import {
+  getPatientList,
+  addPatient,
+  editPatient,
+  delPatient
+} from '@/services/user'
 import type { Patient, PatientList } from '@/types/user'
 import { computed, onMounted, ref } from 'vue'
 import { idCardRules, nameRules } from '@/utils/rules'
@@ -75,6 +80,20 @@ const onSubmit = async () => {
   show.value = false
   loadList()
 }
+
+// 删除患者函数
+const remove = async () => {
+  if (patient.value.id) {
+    await showConfirmDialog({
+      title: '温馨提示',
+      message: `您确认要删除 ${patient.value.name} 患者信息吗 ？`
+    })
+    await delPatient(patient.value.id)
+    show.value = false
+    loadList()
+    showSuccessToast('删除成功')
+  }
+}
 </script>
 
 <template>
@@ -141,6 +160,10 @@ const onSubmit = async () => {
             </template>
           </van-field>
         </van-form>
+        <!-- 删除按钮 -->
+        <van-action-bar v-if="patient.id">
+          <van-action-bar-button @click="remove">删除</van-action-bar-button>
+        </van-action-bar>
       </van-popup>
     </div>
   </div>
@@ -236,5 +259,15 @@ const onSubmit = async () => {
 }
 .pb4 {
   padding-bottom: 4px;
+}
+
+// 底部操作栏
+.van-action-bar {
+  padding: 0 10px;
+  margin-bottom: 10px;
+  .van-button {
+    color: var(--cp-price);
+    background-color: var(--cp-bg);
+  }
 }
 </style>

@@ -5,7 +5,11 @@ import { onMounted, ref } from 'vue'
 
 // 组件挂载完毕后获取数据
 const list = ref<PatientList>([])
-const count = ref(10)
+const options = [
+  { label: '男', value: 1 },
+  { label: '女', value: 0 }
+]
+const gender = ref(1)
 
 const loadList = async () => {
   const res = await getPatientList()
@@ -43,7 +47,7 @@ onMounted(() => {
         :model-value="count"
         @update:model-value="count = $event"
       ></cp-radio-btn> -->
-      <cp-radio-btn v-model="count"></cp-radio-btn>
+      <cp-radio-btn :options="options" v-model="gender"></cp-radio-btn>
     </div>
   </div>
 </template>

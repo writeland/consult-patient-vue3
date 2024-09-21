@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import KnowledgeCard from './KnowledgeCard.vue'
+import type { KnowledgeType } from '@/types/consult'
 
 const list = ref<number[]>([])
 const loading = ref(false)
 const finished = ref(false)
+// 下拉数据更新的函数
 const onLoad = () => {
   // 加载数据
   console.log('loading')
@@ -20,6 +22,10 @@ const onLoad = () => {
     loading.value = false
   }, 1000)
 }
+
+const props = defineProps<{
+  type: KnowledgeType
+}>()
 </script>
 
 <template>

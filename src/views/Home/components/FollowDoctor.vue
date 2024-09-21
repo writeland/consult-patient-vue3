@@ -1,5 +1,20 @@
 <script setup lang="ts">
 import DoctorCard from './DoctorCard.vue'
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
+// 原生js实现适配功能
+// import { onMounted, onUnmounted, ref } from 'vue'
+
+// const width = ref(0)
+// const setWidth = () =>  width.value = window.innerWidth
+// onMounted(() => {
+//   setWidth()
+//   window.addEventListener('resize', setWidth)
+// })
+// onUnmounted(()=>{
+//   window.removeEventListener('resize', setWidth)
+// })
 </script>
 
 <template>
@@ -10,7 +25,11 @@ import DoctorCard from './DoctorCard.vue'
     </div>
     <div class="body">
       <!-- swipe 组件 -->
-      <van-swipe :width="150" :show-indicators="false" :loop="false">
+      <van-swipe
+        :width="(150 / 375) * width"
+        :show-indicators="false"
+        :loop="false"
+      >
         <van-swipe-item v-for="item in 5" :key="item">
           <doctor-card />
         </van-swipe-item>

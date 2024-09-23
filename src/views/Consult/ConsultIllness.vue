@@ -6,6 +6,7 @@ import type {
   UploaderAfterRead,
   UploaderFileListItem
 } from 'vant/lib/uploader/types'
+import { uploadImg } from '@/services/consult'
 
 const timeOptions = [
   { label: '一周内', value: IllnessTime.Week },
@@ -26,10 +27,30 @@ const form = ref<ConsultIllness>({
 
 const fileList = ref([])
 const onAfterRead: UploaderAfterRead = (item) => {
+  if (Array.isArray(item)) return
+  if (!item.file) return
+
+  item.status = 'uploading'
+  item.message = '上传中...'
   // TODO 上传图片
+  uploadImg(item.file)
+    .then((res) => {
+      item.status = 'done'
+      item.message = undefined
+      item.url = res.data.url
+      // 同步数据
+      form.value.pictures?.push(res.data)
+    })
+    .catch(() => {
+      item.status = 'failed'
+      item.message = '上传失败'
+    })
 }
 const onDeleteImg = (item: UploaderFileListItem) => {
   // TODO 删除图片
+  form.value.pictures = form.value.pictures?.filter(
+    (pic) => pic.url !== item.url
+  )
 }
 </script>
 

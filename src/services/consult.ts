@@ -4,7 +4,8 @@ import type {
   KnowledgePage,
   KnowledgeParams,
   PageParams,
-  TopDep
+  TopDep,
+  Image
 } from '@/types/consult'
 import { request } from '@/utils/request'
 
@@ -22,3 +23,10 @@ export const followOrUnfollow = (id: string, type: FollowType = 'doc') =>
 
 // 获得科室数据
 export const getAllDep = () => request<TopDep>('/dep/all')
+
+// 上传图片
+export const uploadImg = (file: File) => {
+  const fd = new FormData()
+  fd.append('file', file)
+  return request<Image>('upload', 'POST', fd)
+}

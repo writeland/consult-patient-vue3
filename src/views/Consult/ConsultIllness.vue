@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { ConsultIllness } from '@/types/consult'
+import type { ConsultIllness, Image } from '@/types/consult'
 import { IllnessTime } from '@/enums'
 import type {
   UploaderAfterRead,
   UploaderFileListItem
 } from 'vant/lib/uploader/types'
 import { uploadImg } from '@/services/consult'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { showToast } from 'vant'
+import { showConfirmDialog, showToast } from 'vant'
 import { useConsultStore } from '@/stores'
 
 // ... 省略 ...
@@ -49,7 +49,7 @@ const form = ref<ConsultIllness>({
   pictures: []
 })
 
-const fileList = ref([])
+const fileList = ref<Image[]>([])
 const onAfterRead: UploaderAfterRead = (item) => {
   if (Array.isArray(item)) return
   if (!item.file) return
@@ -76,6 +76,21 @@ const onDeleteImg = (item: UploaderFileListItem) => {
     (pic) => pic.url !== item.url
   )
 }
+// 数据的回显
+onMounted(() => {
+  if (store.consult.illnessDesc) {
+    showConfirmDialog({
+      title: '温馨提示',
+      message: '是否恢复之前填写的病情信息？',
+      closeOnPopstate: false
+    }).then(() => {
+      // 回显数据
+      const { illnessDesc, illnessTime, consultFlag, pictures } = store.consult
+      form.value = { illnessDesc, illnessTime, consultFlag, pictures }
+      fileList.value = pictures || []
+    })
+  }
+})
 </script>
 
 <template>

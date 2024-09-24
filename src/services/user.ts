@@ -1,3 +1,4 @@
+import type { PartialConsult } from '@/types/consult'
 import type {
   CodeType,
   Patient,
@@ -41,3 +42,7 @@ export const delPatient = (id: string) =>
 // 查询患者详情
 export const getPatientDetail = (id: string) =>
   request<Patient>(`/patient/info/${id}`)
+
+// 生成订单
+export const createConsultOrder = (data: PartialConsult) =>
+  request<{ id: string }>('/patient/consult/order', 'POST', data)

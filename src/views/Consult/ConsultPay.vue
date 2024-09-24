@@ -36,7 +36,7 @@ const agree = ref(false)
 </script>
 
 <template>
-  <div class="consult-pay-page">
+  <div class="consult-pay-page" v-if="patient && payInfo">
     <cp-nav-bar title="支付" />
     <div class="pay-info">
       <p class="tit">图文问诊 {{ payInfo?.payment }} 元</p>
@@ -74,6 +74,11 @@ const agree = ref(false)
       button-text="立即支付"
       text-align="left"
     />
+  </div>
+  <div class="consult-pay-page" v-else>
+    <cp-nav-bar title="支付"></cp-nav-bar>
+    <!-- 骨架屏 -->
+    <van-skeleton title :row="10" margin-top="18px"></van-skeleton>
   </div>
 </template>
 

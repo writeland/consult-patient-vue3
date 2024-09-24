@@ -36,3 +36,10 @@ export const uploadImg = (file: File) => {
 // 拉取预支付订单信息
 export const getConsultOrderPre = (params: ConsultOrderPreParams) =>
   request<ConsultOrderPreData>('/patient/consult/order/pre', 'GET', params)
+
+// 获取支付地址  0 是微信  1 支付宝
+export const getConsultOrderPayUrl = (params: {
+  paymentMethod: 0 | 1
+  orderId: string
+  payCallback: string
+}) => request<{ payUrl: string }>('/patient/consult/pay', 'POST', params)

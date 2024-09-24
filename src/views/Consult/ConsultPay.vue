@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import { getConsultOrderPre } from '@/services/consult'
+import { getConsultOrderPayUrl, getConsultOrderPre } from '@/services/consult'
 import { createConsultOrder, getPatientDetail } from '@/services/user'
 import { useConsultStore } from '@/stores'
 import type { ConsultOrderPreData, PartialConsult } from '@/types/consult'
 import type { Patient } from '@/types/user'
-import { showConfirmDialog, showDialog, showToast } from 'vant'
+import {
+  showConfirmDialog,
+  showDialog,
+  showLoadingToast,
+  showToast
+} from 'vant'
 import { onMounted, ref } from 'vue'
 import { onBeforeRouteLeave, useRouter } from 'vue-router'
 
@@ -98,6 +103,18 @@ const onClose = () => {
       return true
     })
 }
+
+// 支付逻辑
+const pay = async () => {
+  if (paymentMethod.value === undefined) return showToast('请选择支付方式！')
+  showLoadingToast({ message: '跳转支付', duration: 0 })
+  const res = await getConsultOrderPayUrl({
+    orderId: orderId.value,
+    paymentMethod: paymentMethod.value,
+    payCallback: 'http:localhost:5173/room'
+  })
+  window.location.href = res.data.payUrl
+}
 </script>
 
 <template>
@@ -166,7 +183,9 @@ const onClose = () => {
           </van-cell>
         </van-cell-group>
         <div class="btn">
-          <van-button type="primary" round block>立即支付</van-button>
+          <van-button @click="pay" type="primary" round block
+            >立即支付</van-button
+          >
         </div>
       </div>
     </van-action-sheet>

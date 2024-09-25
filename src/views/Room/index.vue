@@ -4,7 +4,7 @@
     <!-- 状态栏 -->
     <room-status />
     <!-- 问诊情况 -->
-    <room-message />
+    <room-message v-for="item in list" :key="item.id" :item="item" />
     <!-- 操作栏 -->
     <room-action />
   </div>
@@ -65,6 +65,7 @@ onMounted(() => {
     })
     list.value.unshift(...arr)
   })
+  console.log(list.value)
 })
 
 onUnmounted(() => {

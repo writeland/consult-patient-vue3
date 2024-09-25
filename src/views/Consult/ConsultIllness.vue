@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ConsultIllness, Image } from '@/types/consult'
-import { IllnessTime } from '@/enums'
+// import { IllnessTime } from '@/enums'
 import type {
   UploaderAfterRead,
   UploaderFileListItem
@@ -10,6 +10,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { showConfirmDialog, showToast } from 'vant'
 import { useConsultStore } from '@/stores'
+import { timeOptions, flagOptions } from '@/services/constants'
 
 // ... 省略 ...
 const disabled = computed(
@@ -31,17 +32,6 @@ const next = () => {
   // 跳转档案管理，需要根据 isChange 实现选择功能
   router.push('/user/patient?isChange=1')
 }
-
-const timeOptions = [
-  { label: '一周内', value: IllnessTime.Week },
-  { label: '一月内', value: IllnessTime.Month },
-  { label: '半年内', value: IllnessTime.HalfYear },
-  { label: '大于半年', value: IllnessTime.More }
-]
-const flagOptions = [
-  { label: '就诊过', value: 1 },
-  { label: '没就诊过', value: 0 }
-]
 const form = ref<ConsultIllness>({
   illnessDesc: '',
   illnessTime: undefined,

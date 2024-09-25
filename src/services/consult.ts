@@ -7,7 +7,8 @@ import type {
   TopDep,
   Image,
   ConsultOrderPreParams,
-  ConsultOrderPreData
+  ConsultOrderPreData,
+  ConsultOrderItem
 } from '@/types/consult'
 import { request } from '@/utils/request'
 
@@ -43,3 +44,6 @@ export const getConsultOrderPayUrl = (params: {
   orderId: string
   payCallback: string
 }) => request<{ payUrl: string }>('/patient/consult/pay', 'POST', params)
+
+export const getConsultOrderDetail = (orderId: string) =>
+  request<ConsultOrderItem>('/patient/consult/order/detail', 'GET', { orderId })

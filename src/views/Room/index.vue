@@ -14,6 +14,42 @@
 import RoomStatus from './components/RoomStatus.vue'
 import RoomAction from './components/RoomAction.vue'
 import RoomMessage from './components/RoomMessage.vue'
+import { io, Socket } from 'socket.io-client'
+import { onMounted, onUnmounted } from 'vue'
+import { baseURL } from '@/utils/request'
+import { useUserStore } from '@/stores'
+import { useRoute } from 'vue-router'
+
+const store = useUserStore()
+const route = useRoute()
+let socket: Socket
+onMounted(() => {
+  // 建立连接
+  socket = io(baseURL, {
+    auth: {
+      token: `Bearer ${store.user?.token}`
+    },
+    query: {
+      orderId: route.query.orderId
+    }
+  })
+
+  socket.on('connect', () => {
+    console.log('连接成功！')
+  })
+
+  socket.on('disconnect', () => {
+    console.log('连接关闭！')
+  })
+
+  socket.on('error', () => {
+    console.log('发生错误！')
+  })
+})
+
+onUnmounted(() => {
+  socket.close()
+})
 </script>
 
 <style scoped lang="scss">

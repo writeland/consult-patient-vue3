@@ -3,9 +3,11 @@ import router from '@/router'
 import axios, { type Method } from 'axios'
 import { showToast } from 'vant'
 
+export const baseURL = 'https://consult-api.itheima.net/'
+
 // 1. 新axios实例，基础配置
 const instance = axios.create({
-  baseURL: 'https://consult-api.itheima.net/',
+  baseURL,
   timeout: 10000
 })
 

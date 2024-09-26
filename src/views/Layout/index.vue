@@ -19,7 +19,7 @@
           ></cp-icon>
         </template>
       </van-tabbar-item>
-      <van-tabbar-item to="/notify">
+      <van-tabbar-item to="/notify" :badge="count || ''">
         消息通知
         <template #icon="{ active }">
           <cp-icon
@@ -40,7 +40,16 @@
 </template>
 
 <script setup lang="ts">
+import { getUnreadMessageCount } from '@/services/user'
+import { onMounted, ref } from 'vue'
+
 // import { ref, reactive } from 'vue'
+const count = ref<number>()
+
+onMounted(async () => {
+  const res = await getUnreadMessageCount()
+  count.value = res.data
+})
 </script>
 
 <style scoped>

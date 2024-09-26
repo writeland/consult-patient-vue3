@@ -46,3 +46,6 @@ export const getPatientDetail = (id: string) =>
 // 生成订单
 export const createConsultOrder = (data: PartialConsult) =>
   request<{ id: string }>('/patient/consult/order', 'POST', data)
+
+export const getUnreadMessageCount = () =>
+  request<number>('/patient/message/unRead/all')

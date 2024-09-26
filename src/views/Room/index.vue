@@ -95,6 +95,7 @@ onMounted(() => {
     loading.value = false
     if (!arr.length) return showToast('没有更多聊天记录了')
     if (initialMsg.value) {
+      socket.emit('updateMsgStatus', arr[arr.length - 1].id)
       // 第一次需要滚动到最新的消息
       nextTick(() => {
         window.scrollTo(0, document.body.scrollHeight)
@@ -109,6 +110,7 @@ onMounted(() => {
   // 接收消息 在onMounted注册
   socket.on('receiveChatMsg', async (event) => {
     list.value.push(event)
+    socket.emit('updateMsgStatus', event.id)
     await nextTick()
     window.scrollTo(0, document.body.scrollHeight)
   })

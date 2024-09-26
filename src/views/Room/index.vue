@@ -2,11 +2,11 @@
   <div class="room-page">
     <cp-nav-bar title="问诊室" />
     <!-- 状态栏 -->
-    <room-status />
+    <room-status :status="consult?.status" :countdown="consult?.countdown" />
     <!-- 问诊情况 -->
     <room-message v-for="item in list" :key="item.id" :item="item" />
     <!-- 操作栏 -->
-    <room-action />
+    <room-action :disabled="consult?.status !== OrderType.ConsultChat" />
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import { baseURL } from '@/utils/request'
 import { useUserStore } from '@/stores'
 import { useRoute } from 'vue-router'
 import type { Message, TimeMessages } from '@/types/room'
-import { MsgType } from '@/enums'
+import { MsgType, OrderType } from '@/enums'
 import type { ConsultOrderItem } from '@/types/consult'
 import { getConsultOrderDetail } from '@/services/consult'
 

@@ -6,7 +6,10 @@
     <!-- 问诊情况 -->
     <room-message v-for="item in list" :key="item.id" :item="item" />
     <!-- 操作栏 -->
-    <room-action :disabled="consult?.status !== OrderType.ConsultChat" />
+    <room-action
+      @send-text="onSendText"
+      :disabled="consult?.status !== OrderType.ConsultChat"
+    />
   </div>
 </template>
 
@@ -77,6 +80,19 @@ onMounted(() => {
   // 监听订单状态的变化
   socket.on('statusChange', () => loadConsult())
 })
+
+// 发送文字信息
+
+const onSendText = (text: string) => {
+  // 发送信息需要  发送人  收消息人  消息类型  消息内容
+  socket.emit('sendChatMsg', {
+    from: store.user?.id,
+    to: consult.value?.docInfo?.id,
+    msgType: MsgType.MsgText,
+    msg: { content: text }
+  })
+}
+
 onUnmounted(() => {
   socket.close()
 })

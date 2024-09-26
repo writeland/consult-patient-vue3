@@ -1,17 +1,28 @@
 <script setup lang="ts">
-import type { Message } from '@/types/room'
+import type { Message, Prescription } from '@/types/room'
 import { IllnessTime, MsgType } from '@/enums'
 import { flagOptions, timeOptions } from '@/services/constants'
 import { showImagePreview, showToast } from 'vant'
 import type { Image } from '@/types/consult'
 import { useUserStore } from '@/stores'
 import dayjs from 'dayjs'
+import { getPrescriptionPic } from '@/services/consult'
+import { c } from 'node_modules/vite/dist/node/types.d-aGj9QkWt'
+
+const showPrescription = async (id?: string) => {
+  if (id) {
+    const res = await getPrescriptionPic(id)
+    showImagePreview([res.data.url])
+  }
+}
 
 defineProps<{
   item: Message
 }>()
 
 const store = useUserStore()
+
+const buy = (e: Prescription) => {}
 
 // 获取患病时间
 const getIllnessTimeText = (time: IllnessTime) =>
@@ -117,29 +128,44 @@ const formatTime = (time: string) => dayjs(time).format('HH:mm')
     </div>
   </div>
   <!-- 处方卡片 -->
-  <!-- 
-  <div class="msg msg-recipe">
-    <div class="content">
+
+  <!-- 处方 -->
+  <div class="msg msg-recipe" v-if="item.msgType === MsgType.CardPre">
+    <div class="content" v-if="item.msg.prescription">
       <div class="head van-hairline--bottom">
         <div class="head-tit">
           <h3>电子处方</h3>
-          <p>原始处方 <van-icon name="arrow"></van-icon></p>
+          <p @click="showPrescription(item.msg.prescription?.id)">
+            原始处方 <van-icon name="arrow"></van-icon>
+          </p>
         </div>
-        <p>李富贵 男 31岁 血管性头痛</p>
-        <p>开方时间：2022-01-15 14:21:42</p>
+        <p>
+          {{ item.msg.prescription.name }}
+          {{ item.msg.prescription.genderValue }}
+          {{ item.msg.prescription.age }}岁
+          {{ item.msg.prescription.diagnosis }}
+        </p>
+        <p>开方时间：{{ item.msg.prescription.createTime }}</p>
       </div>
       <div class="body">
-        <div class="body-item" v-for="i in 2" :key="i">
+        <div
+          class="body-item"
+          v-for="med in item.msg.prescription.medicines"
+          :key="med.id"
+        >
           <div class="durg">
-            <p>优赛明 维生素E乳</p>
-            <p>口服，每次1袋，每天3次，用药3天</p>
+            <p>{{ med.name }} {{ med.specs }}</p>
+            <p>{{ med.usageDosag }}</p>
           </div>
-          <div class="num">x1</div>
+          <div class="num">x{{ med.quantity }}</div>
         </div>
       </div>
-      <div class="foot"><span>购买药品</span></div>
+      <div class="foot">
+        <span @click="buy(item.msg.prescription)">购买药品</span>
+      </div>
     </div>
-  </div> -->
+  </div>
+
   <!-- 评价卡片，后期实现 -->
 </template>
 

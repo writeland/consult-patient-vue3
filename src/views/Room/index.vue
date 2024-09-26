@@ -18,7 +18,7 @@ import RoomStatus from './components/RoomStatus.vue'
 import RoomAction from './components/RoomAction.vue'
 import RoomMessage from './components/RoomMessage.vue'
 import { io, Socket } from 'socket.io-client'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { baseURL } from '@/utils/request'
 import { useUserStore } from '@/stores'
 import { useRoute } from 'vue-router'
@@ -79,6 +79,13 @@ onMounted(() => {
   // console.log(list.value)
   // 监听订单状态的变化
   socket.on('statusChange', () => loadConsult())
+
+  // 接收消息 在onMounted注册
+  socket.on('receiveChatMsg', async (event) => {
+    list.value.push(event)
+    await nextTick()
+    window.scrollTo(0, document.body.scrollHeight)
+  })
 })
 
 // 发送文字信息
@@ -92,7 +99,6 @@ const onSendText = (text: string) => {
     msg: { content: text }
   })
 }
-
 onUnmounted(() => {
   socket.close()
 })

@@ -22,6 +22,7 @@
   "dependencies": {
     "@vueuse/core": "^11.1.0",
     "axios": "^1.7.7",
+    "dayjs": "^1.11.13",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^4.0.1",

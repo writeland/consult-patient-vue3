@@ -8,6 +8,7 @@
     <!-- 操作栏 -->
     <room-action
       @send-text="onSendText"
+      @send-image="onSendImage"
       :disabled="consult?.status !== OrderType.ConsultChat"
     />
   </div>
@@ -24,7 +25,7 @@ import { useUserStore } from '@/stores'
 import { useRoute } from 'vue-router'
 import type { Message, TimeMessages } from '@/types/room'
 import { MsgType, OrderType } from '@/enums'
-import type { ConsultOrderItem } from '@/types/consult'
+import type { ConsultOrderItem, Image } from '@/types/consult'
 import { getConsultOrderDetail } from '@/services/consult'
 
 const consult = ref<ConsultOrderItem>()
@@ -97,6 +98,15 @@ const onSendText = (text: string) => {
     to: consult.value?.docInfo?.id,
     msgType: MsgType.MsgText,
     msg: { content: text }
+  })
+}
+
+const onSendImage = (image: Image) => {
+  socket.emit('sendChatMsg', {
+    from: store.user?.id,
+    to: consult.value?.docInfo?.id,
+    msgType: MsgType.MsgImage,
+    msg: { picture: image }
   })
 }
 onUnmounted(() => {

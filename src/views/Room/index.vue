@@ -31,8 +31,10 @@ import type { ConsultOrderItem, Image } from '@/types/consult'
 import { getConsultOrderDetail } from '@/services/consult'
 import dayjs from 'dayjs'
 import { showToast } from 'vant'
+import { provide } from 'vue'
 
 const consult = ref<ConsultOrderItem>()
+provide('consult', consult)
 const loadConsult = async () => {
   const res = await getConsultOrderDetail(route.query.orderId as string)
   consult.value = res.data
@@ -48,6 +50,16 @@ const time = ref(dayjs().format('YYYY-MM-DD HH:mm:ss'))
 const onRefresh = () => {
   socket.emit('getChatMsgList', 20, time.value, route.query.orderId)
 }
+
+// 提供问诊订单数据给后代组件
+const completeEva = (score: number) => {
+  const item = list.value.find((item) => item.msgType === MsgType.CardEvaForm)
+  if (item) {
+    item.msg.evaluateDoc = { score }
+    item.msgType = MsgType.CardEva
+  }
+}
+provide('completeEva', completeEva)
 
 let socket: Socket
 onMounted(() => {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ConsultType } from '@/enums'
-import ConsultList from './components/ConsultList.vue'
+import ConsultList from '@/views/User/components/ConsultList.vue'
 </script>
 
 <template>

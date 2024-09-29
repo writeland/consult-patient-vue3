@@ -23,6 +23,8 @@ const onCopy = async () => {
   showToast('已复制')
 }
 
+const show = ref(false)
+
 const route = useRoute()
 const item = ref<ConsultOrderItem>()
 onMounted(async () => {
@@ -122,7 +124,9 @@ const { loading: deleteLoading, deleteConsultOrder } = useDeleteOrder(() => {
         @click="onClickCancel(item)"
         >取消问诊</van-button
       >
-      <van-button type="primary" round>继续支付</van-button>
+      <van-button type="primary" round @click="show = true"
+        >继续支付</van-button
+      >
     </div>
     <div
       class="detail-action van-hairline--top"
@@ -185,6 +189,11 @@ const { loading: deleteLoading, deleteConsultOrder } = useDeleteOrder(() => {
       >
       <van-button type="primary" round to="/">咨询其他医生</van-button>
     </div>
+    <cp-pay-sheet
+      v-model:show="show"
+      :order-id="item.id"
+      :actualPayment="item.actualPayment"
+    />
   </div>
   <div class="consult-detail-page" v-else>
     <cp-nav-bar title="问诊详情" />

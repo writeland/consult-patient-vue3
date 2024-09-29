@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import type { ConsultOrderItem } from '@/types/consult'
 import { OrderType } from '@/enums'
-import { ref } from 'vue'
-import { deleteOrder } from '@/services/consult'
-import { showFailToast, showSuccessToast } from 'vant'
-import { useCancelOrder, useShowPrescription } from '@/composables'
+// import { ref } from 'vue'
+// import { deleteOrder } from '@/services/consult'
+// import { showFailToast, showSuccessToast } from 'vant'
+import {
+  useCancelOrder,
+  useDeleteOrder,
+  useShowPrescription
+} from '@/composables'
 import ConsultMore from './ConsultMore.vue'
 
 const { onShowPrescription } = useShowPrescription()
 
-defineProps<{ item: ConsultOrderItem }>()
+const props = defineProps<{ item: ConsultOrderItem }>()
 // 更多操作
 // const showPopover = ref(false)
 // const actions = computed(() => [
@@ -33,19 +37,23 @@ const emit = defineEmits<{
   (e: 'on-delete', id: string): void
 }>()
 // 删除订单
-const deleteLoading = ref(false)
-const deleteConsultOrder = async (item: ConsultOrderItem) => {
-  try {
-    deleteLoading.value = true
-    await deleteOrder(item.id)
-    showSuccessToast('删除成功')
-    emit('on-delete', item.id)
-  } catch (error) {
-    showFailToast('删除失败')
-  } finally {
-    deleteLoading.value = false
-  }
-}
+// const deleteLoading = ref(false)
+// const deleteConsultOrder = async (item: ConsultOrderItem) => {
+//   try {
+//     deleteLoading.value = true
+//     await deleteOrder(item.id)
+//     showSuccessToast('删除成功')
+//     emit('on-delete', item.id)
+//   } catch (error) {
+//     showFailToast('删除失败')
+//   } finally {
+//     deleteLoading.value = false
+//   }
+// }
+
+const { loading: deleteLoading, deleteConsultOrder } = useDeleteOrder(() => {
+  emit('on-delete', props.item.id)
+})
 </script>
 
 <template>

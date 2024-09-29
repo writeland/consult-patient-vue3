@@ -1,4 +1,4 @@
-import { cancelOrder, followOrUnfollow } from '@/services/consult'
+import { cancelOrder, deleteOrder, followOrUnfollow } from '@/services/consult'
 import type { ConsultOrderItem, FollowType } from '@/types/consult'
 import { getPrescriptionPic } from '@/services/consult'
 import { showFailToast, showImagePreview, showSuccessToast } from 'vant'
@@ -49,4 +49,23 @@ export const useCancelOrder = () => {
     }
   }
   return { loading, onClickCancel }
+}
+
+export const useDeleteOrder = (cb: () => void) => {
+  // 删除订单
+  const loading = ref(false)
+  const deleteConsultOrder = async (item: ConsultOrderItem) => {
+    try {
+      loading.value = true
+      await deleteOrder(item.id)
+      showSuccessToast('删除成功')
+      // 成功，做其他业务
+      cb && cb()
+    } catch (e) {
+      showFailToast('删除失败')
+    } finally {
+      loading.value = false
+    }
+  }
+  return { loading, deleteConsultOrder }
 }

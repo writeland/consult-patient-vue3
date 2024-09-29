@@ -66,5 +66,11 @@ export const evaluateConsultOrder = (data: {
 export const getConsultOrderList = (params: ConsultOrderListParams) =>
   request<ConsultOrderPage>('/patient/consult/order/list', 'GET', params)
 
+// 取消问诊
 export const cancelOrder = (id: string) =>
   request(`/patient/order/cancel/${id}`, 'PUT')
+
+// 删除问诊
+// 删除订单
+export const deleteOrder = (id: string) =>
+  request(`/patient/order/${id}`, 'DELETE')

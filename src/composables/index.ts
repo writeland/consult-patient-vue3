@@ -1,5 +1,8 @@
 import { followOrUnfollow } from '@/services/consult'
 import type { FollowType } from '@/types/consult'
+import { getPrescriptionPic } from '@/services/consult'
+import { showImagePreview } from 'vant'
+
 import { ref } from 'vue'
 
 export const useFollow = (type: FollowType = 'doc') => {
@@ -15,4 +18,15 @@ export const useFollow = (type: FollowType = 'doc') => {
     }
   }
   return { loading, follow }
+}
+
+// 封装查看处方逻辑
+export const useShowPrescription = () => {
+  const onShowPrescription = async (id?: string) => {
+    if (id) {
+      const res = await getPrescriptionPic(id)
+      showImagePreview([res.data.url])
+    }
+  }
+  return { onShowPrescription }
 }

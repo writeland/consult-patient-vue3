@@ -8,6 +8,9 @@ import { useUserStore } from '@/stores'
 import dayjs from 'dayjs'
 import { getPrescriptionPic } from '@/services/consult'
 import EvaluateCard from '@/views/Room/components/EvaluateCard.vue'
+import { useShowPrescription } from '@/composables'
+
+const { onShowPrescription } = useShowPrescription()
 
 const showPrescription = async (id?: string) => {
   if (id) {
@@ -140,7 +143,7 @@ const formatTime = (time: string) => dayjs(time).format('HH:mm')
       <div class="head van-hairline--bottom">
         <div class="head-tit">
           <h3>电子处方</h3>
-          <p @click="showPrescription(item.msg.prescription?.id)">
+          <p @click="onShowPrescription(item.msg.prescription?.id)">
             原始处方 <van-icon name="arrow"></van-icon>
           </p>
         </div>

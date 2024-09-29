@@ -4,6 +4,9 @@ import { OrderType } from '@/enums'
 import { computed, ref } from 'vue'
 import { cancelOrder, deleteOrder } from '@/services/consult'
 import { showFailToast, showSuccessToast } from 'vant'
+import { useShowPrescription } from '@/composables'
+
+const { onShowPrescription } = useShowPrescription()
 
 const props = defineProps<{ item: ConsultOrderItem }>()
 const showPopover = ref(false)
@@ -13,6 +16,9 @@ const actions = computed(() => [
   { text: '删除订单' }
 ])
 const onSelect = (action: { text: string }, i: number) => {
+  if (i === 0) {
+    onShowPrescription(props.item.prescriptionId)
+  }
   if (i === 1) {
     // 删除订单
     deleteConsultOrder(props.item)
@@ -126,6 +132,7 @@ const onClickCancel = async (item: ConsultOrderItem) => {
         plain
         size="small"
         round
+        @click="onShowPrescription(item.prescriptionId)"
       >
         查看处方
       </van-button>

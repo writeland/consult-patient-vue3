@@ -1,31 +1,39 @@
 <script setup lang="ts">
 import type { Message, Prescription } from '@/types/room'
-import { MsgType } from '@/enums'
+import { MsgType, PrescriptionStatus } from '@/enums'
 import { showImagePreview, showToast } from 'vant'
 import type { Image } from '@/types/consult'
 import { useUserStore } from '@/stores'
 import dayjs from 'dayjs'
-import { getPrescriptionPic } from '@/services/consult'
+// import { getPrescriptionPic } from '@/services/consult'
 import EvaluateCard from '@/views/Room/components/EvaluateCard.vue'
 import { useShowPrescription } from '@/composables'
 import { getConsultFlagText, getIllnessTimeText } from '@/utils/filter'
+import { useRouter } from 'vue-router'
 const { onShowPrescription } = useShowPrescription()
 
-const showPrescription = async (id?: string) => {
-  if (id) {
-    const res = await getPrescriptionPic(id)
-    showImagePreview([res.data.url])
-  }
-}
+// const showPrescription = async (id?: string) => {
+//   if (id) {
+//     const res = await getPrescriptionPic(id)
+//     showImagePreview([res.data.url])
+//   }
+// }
 
 defineProps<{
   item: Message
 }>()
 
 const store = useUserStore()
+const router = useRouter()
 
-const buy = (e: Prescription) => {
-  console.log(e)
+const buy = (pre?: Prescription) => {
+  if (pre) {
+    if (pre.status === PrescriptionStatus.Invalid)
+      return showToast('处方已失效')
+    if (pre.status === PrescriptionStatus.NotPayment && !pre.orderId)
+      return router.push(`/order/pay?id=${pre.id}`)
+    router.push(`/order/${pre.orderId}`)
+  }
 }
 
 const onPreviewImage = (images?: Image[]) => {

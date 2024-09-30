@@ -193,6 +193,7 @@ const { loading: deleteLoading, deleteConsultOrder } = useDeleteOrder(() => {
       v-model:show="show"
       :order-id="item.id"
       :actualPayment="item.actualPayment"
+      pay-callback="/user/consult"
     />
   </div>
   <div class="consult-detail-page" v-else>
